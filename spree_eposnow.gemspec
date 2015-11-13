@@ -3,11 +3,11 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_eposnow'
   s.version     = '3.0.3'
-  s.summary     = 'TODO: Add gem summary here'
-  s.description = 'TODO: Add (optional) gem description here'
+  s.summary     = 'API Integration between Epos Now stock management and Spree'
+  s.description = 'API Integration between Epos Now stock management and Spree'
   s.required_ruby_version = '>= 2.0.0'
 
-  # s.author    = 'You'
+  s.author    = 'Moneyspyder'
   # s.email     = 'you@example.com'
   # s.homepage  = 'http://www.spreecommerce.com'
 
