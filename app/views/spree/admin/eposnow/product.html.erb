@@ -1,3 +1,23 @@
 <% content_for :page_title do %>
-  Product
+  <%= link_to Spree.t(:products), products_admin_eposnow_index_path %> /
+  <%= @product['Name'] %>
 <% end %>
+
+<div class='row'>
+
+  <div class="col-md-6">
+    <table class='table'>
+      <% @product.each do |key, value| %>
+        <tr>
+          <th>
+            <%= key %>
+          </th>
+          <td>
+            <%= value %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+</div>

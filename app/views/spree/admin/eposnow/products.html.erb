@@ -1,5 +1,5 @@
 <% content_for :page_title do %>
-  <%= Spree.t(:eposnow_products) %>
+  <%= Spree.t(:eposnow_products) %> <%# TODO Change to variants %>
 <% end %>
 
 <div class='row'>
@@ -22,7 +22,6 @@
             <% end %>
             <td>
               <%= link_to_edit_url(
-                    #edit_admin_order_path(order), 
                     product_admin_eposnow_path(x['ProductID']),
                     :no_text => true
                   )
