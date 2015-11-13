@@ -19,6 +19,11 @@ bundle
 bundle exec rails g spree_eposnow:install
 ```
 
+Setup
+-----
+
+To start intergrating with Epos Now firstly you need an API Key and a API Secret see http://developer.eposnowhq.com/Docs/Authentication.
+
 Testing
 -------
 
