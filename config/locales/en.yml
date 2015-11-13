@@ -5,3 +5,4 @@ en:
   hello: "Hello world"
   spree:
     eposnow: 'Epos Now'
+    eposnow_products: 'Epos Now Products'
