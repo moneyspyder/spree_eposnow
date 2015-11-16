@@ -1,0 +1,62 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:eposnow) %>
+<% end %>
+
+<%= form_tag admin_eposnow_path, method: :put do |f| %>
+  <div id="preferences" data-hook>
+
+    <fieldset class="general no-border-top">
+
+      <%# fields_for :eposnow do |f| %>
+        <div class="row">
+          <div class="col-md-6">
+            <!-- <div class="form-group" data-hook="admin_general_setting_api_key"> -->
+            <div class="form-group">
+              <%= label_tag :eposnow_key %>
+              <%= text_field_tag  :eposnow_key, 
+                                  Spree::Config[:eposnow_key], 
+                                  class: 'form-control' 
+              %>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <%= label_tag :eposnow_secret %>
+              <%= text_field_tag  :eposnow_secret, 
+                                  Spree::Config[:eposnow_secret], 
+                                  class: 'form-control'  
+              %>
+            </div>
+          </div>
+
+        </div>
+
+      <%# end %>
+
+      <div class="form-actions" data-hook="buttons">
+        <%= button Spree.t('actions.update'), 'save' %>
+        <span class="or"><%= Spree.t(:or) %></span>
+        <%= button_link_to  Spree.t('actions.cancel'), 
+                            edit_admin_general_settings_url, icon: 'delete' 
+        %>
+      </div>
+
+    </fieldset>
+
+  </div>
+
+<% end %>
+
+<div class='row'>
+
+  <ul class="col-md-6">
+    <li>
+      <%= link_to 'Products', products_admin_eposnow_path %>
+    </li>
+  </ul>
+
+</div>

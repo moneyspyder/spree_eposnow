@@ -2,10 +2,8 @@ Spree::Core::Engine.routes.draw do
 
   namespace :admin do
     #get :eposnow, to: 'eposnow#index'
-    resources :eposnow, only: [:index] do
-      member do
-        get :product
-      end
+    resource :eposnow, only: [:update, :edit] do
+      get 'products/:id', to: 'eposnows#product', as: :product
       collection do
         get :products
       end
