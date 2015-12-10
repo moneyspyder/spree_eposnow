@@ -20,5 +20,10 @@ class Spree::EposNow
   def self.product(id)
     self.get('/api/V2/Product/'+id.to_s)
   end
+
+  def self.customers
+    #https://api.eposnowhq.com/api/V2/Customer?page=
+    self.get('/api/V2/Customer', { query: { page: 1} } )
+  end
   
 end

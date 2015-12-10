@@ -16,7 +16,38 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+
+require 'simplecov'
+SimpleCov.start 'rails'
+
+ENV["RAILS_ENV"] = "test"
+
+require File.expand_path("../dummy/config/environment.rb",  __FILE__)
+
+require 'ffaker'
+require 'rspec/rails'
+require 'database_cleaner'
+
+Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+
+require 'spree/testing_support/factories'
+require 'spree/testing_support/url_helpers'
+require 'spree/testing_support/controller_requests'
+require 'spree/testing_support/authorization_helpers'
+
+FactoryGirl.find_definitions
+
 RSpec.configure do |config|
+
+  config.infer_spec_type_from_file_location!
+  config.mock_with :rspec
+
+  config.include Spree::TestingSupport::ControllerRequests, type: :controller
+  config.include Spree::TestingSupport::UrlHelpers
+  config.include FactoryGirl::Syntax::Methods
+
+  config.extend Spree::TestingSupport::AuthorizationHelpers::Request, type: :feature  
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.

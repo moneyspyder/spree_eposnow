@@ -34,9 +34,11 @@
                 <%= button_link_to  Spree.t('actions.cancel'), 
                                     edit_admin_general_settings_url, icon: 'delete' 
                 %>
-              </div>   
+              </div>  
 
-            <% end %>            
+              <%= link_to 'Documentation', 'http://developer.eposnowhq.com/Docs/Documentation' %> 
+
+            <% end %> 
           
           </div>
 
@@ -48,6 +50,18 @@
                 <li>
                   <%= link_to 'Products', products_admin_eposnow_path %>
                 </li>
+                <li>
+                  <%= link_to 'Customers', customers_admin_eposnow_path %>
+                </li>
+                <li>
+                  <%= link_to 'StockControls', stock_controls_admin_eposnow_path %>
+                </li>
+                <li>
+                  <%= link_to 'Transactions', transactions_admin_eposnow_path %>
+                </li>
+                <li>
+                  <%= link_to 'Staff', staff_admin_eposnow_path %>
+                </li>                                                            
               </ul> 
 
             </aside> 

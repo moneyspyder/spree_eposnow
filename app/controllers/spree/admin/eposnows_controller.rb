@@ -26,4 +26,8 @@ class Spree::Admin::EposnowsController < Spree::Admin::BaseController
                 end
   end
 
+  def customers
+    @customers = Spree::EposNow.customers
+  end
+
 end
