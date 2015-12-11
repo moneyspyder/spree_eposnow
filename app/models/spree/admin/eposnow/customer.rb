@@ -1,6 +1,5 @@
 # encoding: UTF-8
-
-require 'active_resource'
+require 'httparty'
 
 class Spree::Admin::Eposnow::Customer #< ActiveResource::Base
   include ActiveModel::Model
@@ -21,10 +20,26 @@ class Spree::Admin::Eposnow::Customer #< ActiveResource::Base
   def self.create(attrs = {})
     self.post(
       '/api/V2/Customer/', 
-      { 
-        :Title => 0,
-        :Forename => "Mr Ex",
-        :Surname => "Pired"
+      {
+        :body => { 
+          :Title => 0,
+          :Forename => "Mr Ex",
+          :Surname => "Pired" ,
+          :BusinessName => nil,
+          :DateOfBirth => nil,
+          :MainAddressID => 1,
+          :ContactNumber => "09876543987",
+          :ContactNumber2 => "98765439876",
+          :EmailAddress => "made@up.com",
+          :Type => 8,
+          :MaxCredit => 0,
+          :CurrentBalance => 0,
+          :ExpiryDate => "2013-01-17T00:00:00",
+          :CardNumber => "%0003?;1236?",
+          :CurrentPoints => 0,
+          :SignUpDate => "2013-03-12T11:40:49.323",
+          :Notes => nil
+        }.to_json
       }
     )
   end

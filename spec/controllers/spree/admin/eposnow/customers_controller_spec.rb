@@ -45,6 +45,25 @@ RSpec.describe Spree::Admin::Eposnow::CustomersController, type: :controller do
       expect(response.status).to eq(200)
     end
 
-  end    
+  end
+
+  describe 'POST create' do  
+
+    render_views
+
+    stub_authorization!
+
+    context 'with invalid request' do
+
+      it "has a 200 status code" do
+        VCR.use_cassette("fail_to_create_customer") do
+          spree_post :create
+        end
+        expect(response).to render_template("new")
+      end
+
+    end
+
+  end      
 
 end

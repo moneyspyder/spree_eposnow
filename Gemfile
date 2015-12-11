@@ -9,4 +9,6 @@ group :test do
   gem 'vcr'
 end
 
+gem 'pry'
+
 gemspec

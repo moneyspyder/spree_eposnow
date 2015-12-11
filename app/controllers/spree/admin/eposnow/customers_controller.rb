@@ -14,16 +14,16 @@ module Spree
         end
 
         def create
-          #customer = Eposnow::Customer.new(params[:admin_eposnow_customer])
-          #binding.pry
-          if Eposnow::Customer.create(params[:admin_eposnow_customer])
-            #binding.pry
-            raise StandardError.new('IT WORKS')
-            
+          response = Eposnow::Customer.create(params[:admin_eposnow_customer])
+          if response.code == 400
+            @customer = Eposnow::Customer.new(params[:admin_eposnow_customer])
+            @customer.errors.add(:base, response.to_s)
+            return render :new
           end
         end
 
       end
+
     end
 
   end
