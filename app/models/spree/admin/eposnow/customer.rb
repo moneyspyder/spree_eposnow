@@ -1,7 +1,7 @@
 # encoding: UTF-8
 require 'httparty'
 
-class Spree::Admin::Eposnow::Customer #< ActiveResource::Base
+class Eposnow::Customer #< ActiveResource::Base
   include ActiveModel::Model
   #self.site = "https://api.eposnowhq.com"
   include HTTParty
