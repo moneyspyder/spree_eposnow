@@ -4,7 +4,7 @@ module Spree
       class CustomersController < Spree::Admin::BaseController
 
         def new
-          @customer = Eposnow::Customer.new
+          @customer = Spree::Eposnow::Customer.new
         end
 
         def index
@@ -14,9 +14,9 @@ module Spree
         end
 
         def create
-          response = Eposnow::Customer.create(params[:admin_eposnow_customer])
+          response = Spree::Eposnow::Customer.create(params[:admin_eposnow_customer])
           if response.code == 400
-            @customer = Eposnow::Customer.new(params[:admin_eposnow_customer])
+            @customer = Spree::Eposnow::Customer.new(params[:admin_eposnow_customer])
             @customer.errors.add(:base, response.to_s)
             return render :new
           end

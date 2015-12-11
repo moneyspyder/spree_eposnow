@@ -5,7 +5,7 @@
   Epos Now New Customer
 <% end %>
 
-<%= form_for @customer do |f| %>
+<%= form_for [:admin, @customer] do |f| %>
   <%= f.field_container :Forename, class: ['form-group'] do %>
     <%= f.label :Forename, 'Forename' + content_tag(:span, ' *', class: 'required').html_safe %>
     <%= f.text_field :Forename, class: 'form-control title' %>
