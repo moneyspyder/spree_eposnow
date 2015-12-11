@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Spree::Admin::EposnowsController, type: :controller do
+RSpec.describe Spree::Admin::Eposnow::CustomersController, type: :controller do
 
   # before do
   #   allow(controller).to receive(:spree_current_user).and_return(nil)
@@ -22,18 +22,29 @@ RSpec.describe Spree::Admin::EposnowsController, type: :controller do
     Spree::Config[:eposnow_secret] = '868MZR5KHSNQYGVYSYK8N8QN1EV402DG'
   end
 
-  describe 'GET products' do    
+  describe 'GET index' do  
 
     stub_authorization!
 
     it "has a 200 status code" do
-      #spree_get :products
-      VCR.use_cassette("products") do
-        get :products
+      VCR.use_cassette("customers") do
+        spree_get :index
       end
       expect(response.status).to eq(200)
     end
 
-  end
+  end  
+
+  describe 'GET new' do  
+    render_views
+
+    stub_authorization!
+
+    it "has a 200 status code" do
+      spree_get :new
+      expect(response.status).to eq(200)
+    end
+
+  end    
 
 end

@@ -5,5 +5,20 @@
 
 <div class='row'>
 
-  
+  <%= form_for @customer do |f| %>
+    <%= f.field_container :Forename, class: ['form-group'] do %>
+      <%= f.label :Forename, 'Forename' + content_tag(:span, ' *', class: 'required').html_safe %>
+      <%= f.text_field :Forename, class: 'form-control title' %>
+      <%= f.error_message_on :Forename %>
+    <% end %>
+    <%= f.field_container :Surname, class: ['form-group'] do %>
+      <%= f.label :Surname, 'Surname' + content_tag(:span, ' *', class: 'required').html_safe %>
+      <%= f.text_field :Surname, class: 'form-control title' %>
+      <%= f.error_message_on :Surname %>
+    <% end %>     
+
+    <%# render :partial => 'spree/admin/shared/new_resource_links' %>
+    <%= button Spree.t('actions.create'), 'ok', 'submit', {class: 'btn-success'} %>
+  <% end %>
+
 </div>
