@@ -16,7 +16,10 @@ module Spree
       debug_output $stdout
     end  
     
-    attr_accessor :Forename, :Surname
+    attr_accessor   :Title, :Forename, :Surname, :BusinessName, :DateOfBirth, :MainAddressID,
+                    :ContactNumber, :ContactNumber2, :EmailAddress, :Type,
+                    :MaxCredit, :CurrentBalance, :CurrentBalance, :ExpiryDate,
+                    :CardNumber, :CurrentPoints, :SignUpDate, :Notes
 
     def self.create(attrs = {})
       self.post(
