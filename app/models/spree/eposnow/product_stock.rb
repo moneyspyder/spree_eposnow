@@ -27,5 +27,26 @@ module Spree
       #https://api.eposnowhq.com/api/V2/ProductStock?page={Page_No}
     end
 
+    def self.find(id)
+      response = self.get('/api/V2/ProductStock/'+id )
+      self.new response.to_hash
+    end
+
+    def update(attr = {})
+      response = self.class.put(
+        '/api/V2/ProductStock/'+self.StockID.to_s,
+        {
+          :body => attr.to_json
+        }        
+      )
+    end
+
+    def keys
+      [
+        :StockID, :LocationID, :ProductID, :CurrentStock, :MinStock,
+        :MaxStock, :CurrentVolume, :OnOrder, :Alerts
+      ]
+    end
+
   end
 end

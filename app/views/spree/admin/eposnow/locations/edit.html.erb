@@ -1,0 +1,56 @@
+<% content_for :page_title do %>
+  <%# Spree.t(:eposnow_products) %> <%# TODO Change to variants %>
+  Epos Now Edit Location
+<% end %>
+
+<div class='row'>
+
+  <div class="col-md-6">
+    <table class='table'>
+      <% @location.each do |key, value| %>
+        <tr>
+          <th>
+            <%= key %>
+          </th>
+          <td>
+            <%= value %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+</div>
+
+<div class='row'>
+
+  <div class="col-md-12">
+
+  </div>
+
+</div>
+
+<div class='row'>
+  <div class="col-md-12">
+    <%# button_link_to 'Create New Customer', new_admin_eposnow_customer_path, { class: "btn-success", icon: 'add', id: 'admin_new_product' } %> 
+    <%= form_tag link_admin_eposnow_location_path, method: :post do |f| %>
+
+      <% Spree::StockLocation.all.each do |x| %>
+        <%= x.inspect %>
+      <% end %>
+
+      <div class="form-group">
+        <%= label_tag :location %>
+        <%= text_field_tag  :location_id, 
+                            'Location ID',#Spree::Config[:eposnow_secret], 
+                            class: 'form-control'  
+        %>
+      </div>    
+      
+      <div class="form-actions" data-hook="buttons">
+        <%= button Spree.t('actions.update'), 'save' %>
+      </div>
+
+    <% end %>
+  </div>
+</div>

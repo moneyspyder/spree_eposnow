@@ -1,0 +1,38 @@
+<% content_for :page_title do %>
+  <%# Spree.t(:eposnow_products) %> <%# TODO Change to variants %>
+  Epos Now Product Stock
+<% end %>
+
+<div class='row'>
+
+  <div class="col-md-6">
+    <table class='table'>
+      <% @product_stock.keys.each do |key| %>
+        <tr>
+          <th>
+            <%= key %>
+          </th>
+          <td>
+            <%= @product_stock.send(key) %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+
+  <div class='col-md-6'>
+    <%= form_for [:admin, @product_stock], url: admin_eposnow_product_stock_path(@product_stock.StockID), method: :patch do |f| %>
+      <%= f.field_container :CurrentStock, class: ['form-group'] do %>
+        <%= f.label :CurrentStock, 
+                    'CurrentStock' + content_tag(:span, ' *', class: 'required').html_safe 
+        %>
+        <%= f.text_field :CurrentStock, class: 'form-control title' %>
+        <%= f.error_message_on :CurrentStock %>
+      <% end %>    
+
+      <%= button Spree.t('actions.update'), 'ok', 'submit', {class: 'btn-success'} %>
+    <% end %>    
+  </div>
+
+</div>

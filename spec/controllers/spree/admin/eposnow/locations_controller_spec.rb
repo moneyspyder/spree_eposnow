@@ -30,6 +30,19 @@ RSpec.describe Spree::Admin::Eposnow::LocationsController do
       expect(response.status).to eq(200)
     end
 
-  end    
+  end
+
+  describe 'GET edit' do
+
+    stub_authorization!
+
+    it "has a 200 status code" do
+      #VCR.use_cassette("locations") do
+      spree_get :edit, id: 4230
+      #end
+      expect(response.status).to eq(200)
+    end    
+
+  end
 
 end

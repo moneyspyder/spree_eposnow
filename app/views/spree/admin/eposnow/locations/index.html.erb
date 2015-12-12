@@ -13,6 +13,7 @@
             <th><%= x %></th>
           <% end %>
           <th><%= ' ' %></th>
+          <th><%= ' ' %></th>
         </tr>  
       </thead>
       <tbody>
@@ -22,12 +23,21 @@
               <td><%= y %></td>
             <% end %>
             <td>
-              <%# link_to_edit_url(
-                    product_admin_eposnow_path(x['ProductID']),
-                    :no_text => true
-                  )
-              %>
-            </td>            
+              <%= link_to 'Edit', edit_admin_eposnow_location_path(x['LocationID']) %>
+            </td>
+            <td>
+              <% if Spree::StockLocation.where(eposnow_location_id: x['LocationID'] ).first %>
+                <%= link_to(
+                      'Stock Location', 
+                      admin_stock_location_path(
+                        Spree::StockLocation.where(eposnow_location_id: x['LocationID'] ).first
+                      )
+                    ) 
+                %>
+              <% else %>
+                <i>Reference</i>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>

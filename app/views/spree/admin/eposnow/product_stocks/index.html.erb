@@ -27,6 +27,12 @@
                     :no_text => true
                   )
               %>
+              <%= link_to_edit_url(
+                    #product_admin_eposnow_path(x['ProductID']),
+                    edit_admin_eposnow_product_stock_path( x['StockID'] ),
+                    :no_text => true
+                  )
+              %>              
             </td>            
           </tr>
         <% end %>

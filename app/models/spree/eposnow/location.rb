@@ -23,6 +23,10 @@ module Spree
       self.get('/api/V2/Location')
     end
 
+    def self.find(id)
+      self.get('/api/V2/Location/'+id)
+    end
+
   end
 
 end
