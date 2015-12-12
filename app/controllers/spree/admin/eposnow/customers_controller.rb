@@ -15,11 +15,12 @@ module Spree
 
         def create
           response = Spree::Eposnow::Customer.create(params[:admin_eposnow_customer])
-          if response.code == 400
-            @customer = Spree::Eposnow::Customer.new(params[:admin_eposnow_customer])
-            @customer.errors.add(:base, response.to_s)
-            return render :new
+          if response.code == 201
+            return redirect_to admin_eposnow_customers_path
           end
+          @customer = Spree::Eposnow::Customer.new(params[:admin_eposnow_customer])
+          @customer.errors.add(:base, response.to_s)
+          return render :new          
         end
 
       end

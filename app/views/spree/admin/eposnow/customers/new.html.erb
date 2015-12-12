@@ -15,7 +15,9 @@
     <%= f.label :Surname, 'Surname' + content_tag(:span, ' *', class: 'required').html_safe %>
     <%= f.text_field :Surname, class: 'form-control title' %>
     <%= f.error_message_on :Surname %>
-  <% end %>     
+  <% end %>    
+
+  <%# Spree::Eposnow::CustomerType.all.inspect %> 
 
   <%# render :partial => 'spree/admin/shared/new_resource_links' %>
   <%= button Spree.t('actions.create'), 'ok', 'submit', {class: 'btn-success'} %>

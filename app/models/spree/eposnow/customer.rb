@@ -32,7 +32,7 @@ module Spree
             :ContactNumber => "09876543987",
             :ContactNumber2 => "98765439876",
             :EmailAddress => "made@up.com",
-            :Type => 8,
+            :Type => 4187,
             :MaxCredit => 0,
             :CurrentBalance => 0,
             :ExpiryDate => "2013-01-17T00:00:00",

@@ -55,11 +55,22 @@ RSpec.describe Spree::Admin::Eposnow::CustomersController, type: :controller do
 
     context 'with invalid request' do
 
-      it "has a 200 status code" do
+      it "renders the new template" do
         VCR.use_cassette("fail_to_create_customer") do
           spree_post :create
         end
         expect(response).to render_template("new")
+      end
+
+    end
+
+    context 'with successful response' do
+
+      it "redirects to the index page" do
+        VCR.use_cassette("create_customer") do
+          spree_post :create
+        end
+        expect(response).to redirect_to(admin_eposnow_customers_path)
       end
 
     end
