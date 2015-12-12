@@ -10,6 +10,7 @@ Spree::Core::Engine.routes.draw do
     #scope module: :eposnow do #, as: 'admin_eposnow' do
       resources :customers, except: [:destroy]
       resources :product_stocks, except: [:destroy]
+      resources :locations, except: [:destroy]
     end
 
     resource :eposnow, only: [:update, :edit] do
