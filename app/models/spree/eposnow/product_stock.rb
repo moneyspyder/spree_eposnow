@@ -16,6 +16,9 @@ module Spree
       debug_output $stdout
     end
 
+    attr_accessor   :StockID, :LocationID, :ProductID, :CurrentStock, :MinStock,
+                    :MaxStock, :CurrentVolume, :OnOrder, :Alerts
+
     def self.paginate(page_no = 1)
       self.get(
         '/api/V2/ProductStock/',

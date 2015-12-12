@@ -16,7 +16,6 @@ Spree::Core::Engine.routes.draw do
       get 'products/:id', to: 'eposnows#product', as: :product
       collection do
         get :products
-        get :stock_controls
         get :transactions
         get :staff
       end

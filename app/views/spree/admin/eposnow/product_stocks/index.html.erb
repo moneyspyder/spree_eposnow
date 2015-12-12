@@ -1,0 +1,45 @@
+<% content_for :page_title do %>
+  <%# Spree.t(:eposnow_products) %> <%# TODO Change to variants %>
+  Epos Now Product Stocks
+<% end %>
+
+<div class='row'>
+
+  <div class="col-md-12">
+    <table class='table'>
+      <thead>
+        <tr>
+          <% @product_stocks.first.keys.each do |x| %>
+            <th><%= x %></th>
+          <% end %>
+          <th><%= ' ' %></th>
+        </tr>  
+      </thead>
+      <tbody>
+        <% @product_stocks.each do |x| %>
+          <tr>
+            <% x.values.each do |y| %>
+              <td><%= y %></td>
+            <% end %>
+            <td>
+              <%# link_to_edit_url(
+                    product_admin_eposnow_path(x['ProductID']),
+                    :no_text => true
+                  )
+              %>
+            </td>            
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<div class='row'>
+  <div class="col-md-12">
+    <%= button_link_to  'Create New Product Stock', new_admin_eposnow_customer_path, 
+                        { class: "btn-success", icon: 'add', id: 'admin_new_product' } 
+    %> 
+  </div>
+</div>
