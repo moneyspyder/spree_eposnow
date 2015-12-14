@@ -3,10 +3,10 @@ class Spree::Admin::EposnowsController < Spree::Admin::BaseController
   def edit
   end
 
-  # https://api.eposnowhq.com/api/V2/Product/{Product_ID}
-  def product
-    @product = Spree::EposNow.product(params[:id])    
-  end
+  # # https://api.eposnowhq.com/api/V2/Product/{Product_ID}
+  # def product
+  #   @product = Spree::EposNow.product(params[:id])    
+  # end
 
   def update
     params.each do |name, value|

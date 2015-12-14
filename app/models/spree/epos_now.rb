@@ -13,10 +13,6 @@ class Spree::EposNow
     debug_output $stdout
   end
 
-  def self.products
-    self.get('/api/V2/Product', { query: { page: 1 } } )
-  end
-
   def self.product(id)
     self.get('/api/V2/Product/'+id.to_s)
   end

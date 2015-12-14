@@ -15,12 +15,21 @@ Spree::Core::Engine.routes.draw do
           post :link
         end
       end
+      # TODO Would rather just use products but that route goes to spree product
+      resources :eposnow_products, only: [:index, :show] do
+        member do
+          patch :sync
+        end
+        collection do
+          post :sync_all
+        end
+      end
     end
 
     resource :eposnow, only: [:update, :edit] do
       get 'products/:id', to: 'eposnows#product', as: :product
       collection do
-        get :products
+        #get :products
         get :transactions
         get :staff
       end
