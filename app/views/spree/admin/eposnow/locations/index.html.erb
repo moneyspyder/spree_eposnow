@@ -29,7 +29,9 @@
               <% if Spree::StockLocation.where(eposnow_location_id: x['LocationID'] ).first %>
                 <%= link_to(
                       'Stock Location', 
-                      admin_stock_location_path(
+                      #admin_stock_location_path(
+                        # TODO I'm not sure admin_stock_location_path exists - it shouldn't be a route
+                      edit_admin_stock_location_path(
                         Spree::StockLocation.where(eposnow_location_id: x['LocationID'] ).first
                       )
                     ) 

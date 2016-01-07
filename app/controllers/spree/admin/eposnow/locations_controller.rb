@@ -9,6 +9,7 @@ module Spree
 
         def edit
           @location = Spree::Eposnow::Location.find(params[:id])
+          @stock_location = Spree::StockLocation.where(eposnow_location_id: params[:id]).first_or_initialize
           #https://api.eposnowhq.com/api/V2/Location/{Location_ID}
         end
 

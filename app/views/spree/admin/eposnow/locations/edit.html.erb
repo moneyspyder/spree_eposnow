@@ -20,6 +20,53 @@
     </table>
   </div>
 
+  <div class="col-md-6">
+    <%= form_for [:admin, @stock_location] do |f| %>
+
+      <div class="form-group">
+        <%= f.label :name, Spree.t(:name) %>
+        <%= f.text_field  :name,
+                          class: 'form-control', :value => @location['Name']
+        %>
+      </div>    
+
+      <div class="form-group">
+        <%= f.label :address1, Spree.t(:street_address) %>
+        <%= f.text_field  :address1,
+                          class: 'form-control', :value => @location['Address1']
+        %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :city, Spree.t(:city) %>
+        <%= f.text_field  :city,
+                          class: 'form-control', :value => @location['Town']  
+        %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :zipcode, Spree.t(:zip) %>
+        <%= f.text_field  :zipcode,
+                          class: 'form-control', :value => @location['PostCode']
+        %>
+      </div>
+
+      <div class="form-group" data-hook="stock_location_country">
+        <%= f.label :country_id, Spree.t(:country) %>
+        <span id="country">
+          <%= f.collection_select :country_id, available_countries, :id, :name, {}, { class: 'select2' } %></span>
+      </div>      
+
+      <%= f.hidden_field :eposnow_location_id, :value => @location['LocationID'] %>
+
+      <div class="form-actions" data-hook="buttons">
+        <%# button Spree.t('actions.update'), 'save' %>
+        <%= button 'Sync', 'save' %>
+      </div>
+
+    <% end %>
+  </div>
+
 </div>
 
 <div class='row'>
@@ -34,10 +81,6 @@
   <div class="col-md-12">
     <%# button_link_to 'Create New Customer', new_admin_eposnow_customer_path, { class: "btn-success", icon: 'add', id: 'admin_new_product' } %> 
     <%= form_tag link_admin_eposnow_location_path, method: :post do |f| %>
-
-      <% Spree::StockLocation.all.each do |x| %>
-        <%= x.inspect %>
-      <% end %>
 
       <div class="form-group">
         <%= label_tag :location %>
