@@ -35,6 +35,34 @@ RSpec.describe Spree::Admin::Eposnow::CategoriesController, type: :controller do
       expect(response.status).to eq(200)
     end
 
-  end    
+  end
+
+  describe 'POST sync' do
+
+    render_views
+
+    stub_authorization!
+
+    it "it creates a category taxonomy" do
+      expect{
+        VCR.use_cassette("sync_categories") do
+          spree_post :sync
+        end
+      }.to change{
+        Spree::Taxonomy.count
+      }.from(0).to(1)
+    end
+
+    it "it creates a taxon" do
+      expect{
+        VCR.use_cassette("sync_categories") do
+          spree_post :sync
+        end
+      }.to change{
+        Spree::Taxon.count
+      }.from(0).to(2)
+    end
+
+  end  
 
 end
