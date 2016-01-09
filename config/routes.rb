@@ -8,6 +8,7 @@ Spree::Core::Engine.routes.draw do
     #end
     namespace :eposnow do
     #scope module: :eposnow do #, as: 'admin_eposnow' do
+      resources :categories, except: [:destroy]
       resources :customers, except: [:destroy]
       resources :product_stocks, except: [:destroy]
       resources :locations, except: [:destroy] do

@@ -1,6 +1,8 @@
 SpreeEposnow
 ============
 
+[![Build Status](https://semaphoreci.com/api/v1/projects/cbea3b0b-59b4-4d30-9c9c-557017f9aeb8/655602/badge.svg)](https://semaphoreci.com/phlexshop/spree_eposnow)
+
 Introduction goes here.
 
 Installation
