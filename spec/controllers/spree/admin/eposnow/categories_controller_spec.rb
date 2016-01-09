@@ -63,6 +63,16 @@ RSpec.describe Spree::Admin::Eposnow::CategoriesController, type: :controller do
       }.from(0).to(2)
     end
 
+    it "it creates a taxon" do
+      expect{
+        VCR.use_cassette("sync_categories_with_parent") do
+          spree_post :sync
+        end
+      }.to change{
+        Spree::Taxon.count
+      }.from(0).to(3)
+    end    
+
   end  
 
 end
