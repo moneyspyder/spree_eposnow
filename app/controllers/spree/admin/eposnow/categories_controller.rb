@@ -5,7 +5,8 @@ module Spree
 
         MAPPING = {
           "Name" => :name,
-          "Description" => :description
+          "Description" => :description,
+          "CategoryID" => :eposnow_category_id
         }
 
         def index
@@ -16,15 +17,18 @@ module Spree
         end
 
         def sync
+          create_count = 0
           root_category = Spree::Taxonomy.where(name: 'Categories').first_or_create
           root_taxon_category = Spree::Taxon.where(name: 'Categories')
           Spree::Eposnow::Category.all.each do |category|
             taxon = Spree::Taxon.where(name: category['Name']).first_or_initialize
             attributes = Hash[*MAPPING.collect { |key,value| [value, category[key]] }.flatten]
             attributes[:taxonomy] = root_category
-            taxon.update_attributes(attributes)
+            if taxon.update_attributes(attributes)
+              create_count += 1
+            end
           end
-          flash[:success] = "Categories sync complete"
+          flash[:success] = "#{create_count} categories sync'd"
           return redirect_to admin_eposnow_categories_path
         end
 
