@@ -43,7 +43,12 @@ module Spree
       variant = Spree::Variant.find_by_sku(self.Sku)
       
       if Spree::Variant.find_by_sku(self.Sku)
-
+        category = Spree::Taxon.find_by_eposnow_category_id(self.CategoryID)
+        product = variant.product
+        unless product.taxons.include?(category)
+          product.taxons << category
+          product.save
+        end
       else
 
         product = Spree::Product.new

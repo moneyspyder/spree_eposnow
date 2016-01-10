@@ -38,7 +38,6 @@ module Spree
             end
             page += 1
             @products = Spree::Eposnow::Product.paginate(page)
-            puts product_count
           end until @products.length < 200
 
         end
