@@ -19,18 +19,17 @@ module Spree
         def sync
           create_count = 0
           root_category = Spree::Taxonomy.where(name: 'Categories').first_or_create
-          root_taxon_category = Spree::Taxon.where(name: 'Categories')
+          root_taxon_category = Spree::Taxon.where(name: 'Categories').first
           Spree::Eposnow::Category.all.each do |category|
             taxon = Spree::Taxon.where(name: category['Name']).first_or_initialize
             attributes = Hash[*MAPPING.collect { |key,value| [value, category[key]] }.flatten]
             attributes[:taxonomy] = root_category
             unless category['ParentID'].nil?
-              parent_taxon = Spree::Taxon.find_by_eposnow_category_id(category['ParentID'])
-              unless parent_taxon.nil?
-                attributes[:parent] = parent_taxon
-              end
+              attributes[:parent] = Spree::Taxon.find_by_eposnow_category_id(category['ParentID'])
+            else
+              attributes[:parent] = root_taxon_category
             end
-            if taxon.update_attributes(attributes)
+            if attributes[:parent] && taxon.update_attributes(attributes)
               create_count += 1
             end
           end
