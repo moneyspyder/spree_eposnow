@@ -22,18 +22,4 @@ RSpec.describe Spree::Admin::EposnowsController, type: :controller do
     Spree::Config[:eposnow_secret] = '868MZR5KHSNQYGVYSYK8N8QN1EV402DG'
   end
 
-  describe 'GET products' do    
-
-    stub_authorization!
-
-    it "has a 200 status code" do
-      #spree_get :products
-      VCR.use_cassette("products") do
-        get :products
-      end
-      expect(response.status).to eq(200)
-    end
-
-  end
-
 end

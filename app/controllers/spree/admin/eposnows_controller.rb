@@ -17,13 +17,13 @@ class Spree::Admin::EposnowsController < Spree::Admin::BaseController
     redirect_to edit_admin_eposnow_url
   end
 
-  # http://developer.eposnowhq.com/Docs/Product
-  # GET https://api.eposnowhq.com/api/V2/Product?page={Page_No}
+  # # http://developer.eposnowhq.com/Docs/Product
+  # # GET https://api.eposnowhq.com/api/V2/Product?page={Page_No}
 
-  def products
-    @products = Spree::EposNow.products.collect do |x| 
-                  x.slice("Name", "Description", "Sku", "ProductID")
-                end
-  end
+  # def products
+  #   @products = Spree::EposNow.products.collect do |x| 
+  #                 x.slice("Name", "Description", "Sku", "ProductID")
+  #               end
+  # end
 
 end
