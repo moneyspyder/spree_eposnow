@@ -41,6 +41,17 @@ module Spree
       )
     end
 
+    def self.index_keys
+      keys - [:StockID]
+    end
+
+    def self.keys
+      [
+        :StockID, :LocationID, :Product, :CurrentStock, :MinStock,
+        :MaxStock, :CurrentVolume, :OnOrder, :Alerts
+      ]      
+    end
+
     def keys
       [
         :StockID, :LocationID, :ProductID, :CurrentStock, :MinStock,

@@ -9,18 +9,45 @@
     <table class='table'>
       <thead>
         <tr>
-          <% @product_stocks.first.keys.each do |x| %>
+          <% Spree::Eposnow::ProductStock.index_keys.each do |x| %>
             <th><%= x %></th>
           <% end %>
           <th><%= ' ' %></th>
-        </tr>  
+        </tr>
       </thead>
       <tbody>
         <% @product_stocks.each do |x| %>
           <tr>
-            <% x.values.each do |y| %>
-              <td><%= y %></td>
-            <% end %>
+            <%# x.values.each do |y| %>
+            <%# Spree::Eposnow::ProductStock.index_keys.each do |y| %>
+            <td><%= x['LocationID'] %></td>
+            <td>
+              <%# stock_admin_product_path(Spree::Product.find_by_epos_product_id(x['Product'])) %>
+              <% product = Spree::Variant.find_by_eposnow_product_id(x['ProductID']).try(:product) %>
+
+              <% if product %>
+                <% url = stock_admin_product_path(product) %>
+                <%= link_to(
+                      truncate(product.name, length: 50), 
+                      url, 
+                      class: 'info', 
+                      itemprop: "name", 
+                      title: product.name
+                    )
+                %>
+              <% else %>
+                <b>Missing</b> 
+                (<%= link_to(x['ProductID'], admin_eposnow_eposnow_product_path(x['ProductID'])) %>)
+              <% end %>          
+            </td>
+            <td><%= x['CurrentStock'] %></td>
+            <td><%= x['MinStock'] %></td>
+            <td><%= x['MaxStock'] %></td>
+            <td><%= x['CurrentVolume'] %></td>
+            <td><%= x['OnOrder'] %></td>
+
+              
+            <%# end %>
             <td>
               <%# link_to_edit_url(
                     product_admin_eposnow_path(x['ProductID']),
