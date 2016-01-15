@@ -1,6 +1,6 @@
 <% content_for :page_title do %>
   <%# Spree.t(:eposnow_products) %> <%# TODO Change to variants %>
-  Epos Now Product Stocks
+  Epos Now Product Stocks (Showing <%= @product_stocks.length %>)
 <% end %>
 
 <div class='row'>
@@ -42,10 +42,20 @@
 
 </div>
 
-<div class='row'>
-  <div class="col-md-12">
-    <%= button_link_to  'Create New Product Stock', new_admin_eposnow_customer_path, 
-                        { class: "btn-success", icon: 'add', id: 'admin_new_product' } 
-    %> 
+
+
+
+
+<div class="row index-pagination-row">
+  <div class="col-sm-6">
+
+  </div>
+  <div class="col-sm-6">
+    <div class="pagination-wrap">
+      <%= 
+        button_link_to 'Next', admin_eposnow_product_stocks_path(page: params[:page].to_i+1),
+                        {class: 'btn-default pull-right'}
+      %>
+    </div>
   </div>
 </div>
