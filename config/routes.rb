@@ -14,7 +14,11 @@ Spree::Core::Engine.routes.draw do
         end
       end
       resources :customers, except: [:destroy]
-      resources :product_stocks, except: [:destroy]
+      resources :product_stocks, except: [:destroy] do
+        collection do
+          post :sync_all
+        end
+      end
       resources :locations, except: [:destroy] do
         member do 
           post :link

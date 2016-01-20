@@ -3,6 +3,11 @@
   Epos Now Product Stocks (Showing <%= @product_stocks.length %>)
 <% end %>
 
+<% content_for :page_actions do %>
+  <%# button_link_to 'Sync', sync_admin_eposnow_categories_path, class: "btn-success" %>
+  <%= button_to 'Sync', sync_all_admin_eposnow_product_stocks_path, class: "btn btn-success" %>
+<% end %>
+
 <div class='row'>
 
   <div class="col-md-12">
