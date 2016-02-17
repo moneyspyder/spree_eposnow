@@ -39,6 +39,15 @@ module Spree
       self.new response.to_hash      
     end
 
+    def create
+      self.class.post(
+        '/api/V2/Product/', 
+        {
+          :body => Hash[*self.create_keys.collect { |x| [x, self.send(x)] }.flatten].to_json
+        }
+      )      
+    end
+
     def sync
       variant = Spree::Variant.find_by_sku(self.Sku)
       
@@ -78,13 +87,29 @@ module Spree
     end
 
     def keys
+      required_text_fields+unrequired_text_fields+boolean_fields
+    end
+
+    def create_keys
+      (keys - [:ProductID])
+    end
+
+    def required_text_fields
+      [:Name, :CostPrice, :SalePrice, :EatOutPrice]
+    end
+
+    def unrequired_text_fields
       [
-        :ProductID, :Name, :Description, :CostPrice, :SalePrice, :EatOutPrice,
+        :ProductID, :Name, :Description,
         :CategoryID, :Barcode, :TaxRateID, :EatOutTaxRateID, :Sku,
-        :SellOnWeb, :SellOnTill, :BrandID, :SupplierID, :PopupNoteID,
+        :BrandID, :SupplierID, :PopupNoteID,
         :UnitOfSale, :VolumeOfSale, :MultiChoiceID, :ColourID,
         :VariantGroupID, :Size, :OrderCode, :ButtonColourID
       ]
+    end
+
+    def boolean_fields
+      [:SellOnWeb, :SellOnTill]
     end
 
   end

@@ -24,6 +24,16 @@ module Spree
           @product = Spree::Eposnow::Product.new
         end
 
+        def create
+          binding.pry
+          @product = Spree::Eposnow::Product.new(params[:eposnow_product])
+          if @product.create
+            return redirect_to admin_eposnow_products_path
+          else
+            return render :new
+          end
+        end
+
         def sync
           @product = Spree::Eposnow::Product.find(params[:id])
           @product.sync

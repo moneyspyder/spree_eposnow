@@ -2,17 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Spree::Admin::Eposnow::ProductsController, type: :controller do
 
-  # before do
-  #   allow(controller).to receive(:spree_current_user).and_return(nil)
-  # end
   before do
     controller.stub spree_current_user: nil
   end  
 
-  #let!(:store) { create(:store, default: true) }
-
   VCR.configure do |config|
-    #config.cassette_library_dir = File.join(Flexshop::Engine.root, "test/fixtures/vcr_cassettes")
     config.cassette_library_dir = File.join( SpreeEposnow::Engine.root, "spec/fixtures/vcr_cassettes" )
     config.hook_into :webmock # or :fakeweb
   end
@@ -47,6 +41,49 @@ RSpec.describe Spree::Admin::Eposnow::ProductsController, type: :controller do
       spree_get :new
       expect(response.status).to eq(200)
     end
+
+  end
+
+  describe 'POST create' do
+
+    let(:params) do
+      {
+        "Name"=>"",
+        "CostPrice"=>"5.95 ",
+        "SalePrice"=>"16.95 ",
+        "EatOutPrice"=>"16.95 ",
+        "ProductID"=>"",
+        "Description"=>"",
+        "CategoryID"=>"",
+        "Barcode"=>"",
+        "TaxRateID"=>"",
+        "EatOutTaxRateID"=>"",
+        "Sku"=>"2384092342",
+        "BrandID"=>"",
+        "SupplierID"=>"",
+        "PopupNoteID"=>"",
+        "UnitOfSale"=>"",
+        "VolumeOfSale"=>"",
+        "MultiChoiceID"=>"",
+        "ColourID"=>"",
+        "VariantGroupID"=>"",
+        "Size"=>"",
+        "OrderCode"=>"",
+        "ButtonColourID"=>"",
+        "SellOnWeb"=>"1",
+        "SellOnTill"=>"1"
+      }
+    end
+
+    render_views
+    stub_authorization!
+
+    it "has a 200 status code" do
+      VCR.use_cassette("create_product") do
+        spree_post :create, eposnow_product: params
+      end
+      expect(response.status).to eq(302)
+    end    
 
   end
 

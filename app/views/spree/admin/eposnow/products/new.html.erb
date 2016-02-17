@@ -10,7 +10,7 @@
                   url: admin_eposnow_products_path do |f|
                   #method: :patch do |f| 
     %>
-      <% @product.keys.each do |key| %> 
+      <% @product.required_text_fields.each do |key| %> 
         <div class="form-group">
           <%= f.label key.to_sym %>
           <%= f.text_field  key.to_sym,
@@ -19,12 +19,65 @@
         </div>       
       <% end %>
 
+      <% @product.unrequired_text_fields.each do |key| %> 
+        <div class="form-group">
+          <%= f.label key.to_sym %>
+          <%= f.text_field  key.to_sym,
+                            class: 'form-control'#, :value => @product[key]
+          %>
+        </div>       
+      <% end %> 
+
+      <% @product.boolean_fields.each do |key| %> 
+        <div class="form-group">
+          <%= f.label key.to_sym %>
+          <%= f.check_box  key.to_sym,
+                            class: 'form-control'#, :value => @product[key]
+          %>
+        </div>       
+      <% end %>            
+
       <%= button Spree.t('actions.sync'), 'ok', 'submit', {class: 'btn-success'} %>
     <% end %>    
   </div>
 
 
   <div class="col-md-6">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title">
+          Required
+        </h1>
+      </div>
+
+      <div class="panel-body">
+        <%
+          required = {
+            'Name' => 'Candle stick', 
+            'CostPrice' => '5.95', 
+            'SalePrice' => '16.95', 
+            'EatOutPrice' => '16.95'
+          }
+        %>        
+        <ul>
+          <% required.each do |key,value| %>
+          <li>
+            <b>
+              <%= key %>
+            </b>
+            e.g. <%= value %>
+          </li>
+          <% end %>
+        </ul>
+        <ul>
+          <li>
+            <b>Sku</b> e.g. 2384092342
+          </li>
+        </ul>
+      </div>
+    </div>
+
   </div>  
 
 </div>
