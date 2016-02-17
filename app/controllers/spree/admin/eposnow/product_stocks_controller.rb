@@ -31,17 +31,15 @@ module Spree
             # Spree::StockItem
             #binding.pry
             stock_item = stock_location.first.stock_items.where(variant:variant).first_or_initialize
-            #if stock_item.new_record?
-              #stock_item.count_on_hand = product_stock['CurrentStock']
-              #stock_item.save
-            #else
 
-            #end
             stock_item.set_count_on_hand product_stock['CurrentStock'] >= 0 ? product_stock['CurrentStock'] : 0
+            stock_item.eposnow_product_stock_id = product_stock['StockID']
 
+
+            puts stock_item.inspect
             #stock_movement = stock_location.stock_movements.build(stock_movement_params)
             #stock_movement.stock_item = stock_location.set_up_stock_item(variant)            
-            puts stock_location.inspect
+            #puts stock_location.inspect
           end
           return redirect_to admin_eposnow_product_stocks_path
         end
