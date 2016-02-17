@@ -42,7 +42,7 @@
                 %>
               <% else %>
                 <b>Missing</b> 
-                (<%= link_to(x['ProductID'], admin_eposnow_eposnow_product_path(x['ProductID'])) %>)
+                (<%= link_to(x['ProductID'], admin_eposnow_product_path(x['ProductID'])) %>)
               <% end %>          
             </td>
             <td><%= x['CurrentStock'] %></td>
@@ -51,14 +51,7 @@
             <td><%= x['CurrentVolume'] %></td>
             <td><%= x['OnOrder'] %></td>
 
-              
-            <%# end %>
             <td>
-              <%# link_to_edit_url(
-                    product_admin_eposnow_path(x['ProductID']),
-                    :no_text => true
-                  )
-              %>
               <%= link_to_edit_url(
                     #product_admin_eposnow_path(x['ProductID']),
                     edit_admin_eposnow_product_stock_path( x['StockID'] ),

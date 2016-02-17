@@ -31,9 +31,10 @@
       <% @product.boolean_fields.each do |key| %> 
         <div class="form-group">
           <%= f.label key.to_sym %>
-          <%= f.check_box  key.to_sym,
+          <%# f.check_box  key.to_sym,
                             class: 'form-control'#, :value => @product[key]
           %>
+          <%= f.select key.to_sym, [['true', true], ['false', false]] %>
         </div>       
       <% end %>            
 

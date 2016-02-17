@@ -4,6 +4,9 @@ module Spree
   
   class Eposnow::Product #< ActiveResource::Base
     include ActiveModel::Model
+    include ActiveModel::Validations
+
+    validates :Name, length: { maximum: 28 }
     #self.site = "https://api.eposnowhq.com"
     include HTTParty
 
@@ -40,12 +43,14 @@ module Spree
     end
 
     def create
-      self.class.post(
+      return false unless self.valid?
+      response = self.class.post(
         '/api/V2/Product/', 
         {
           :body => Hash[*self.create_keys.collect { |x| [x, self.send(x)] }.flatten].to_json
         }
       )      
+      response
     end
 
     def sync
@@ -87,7 +92,7 @@ module Spree
     end
 
     def keys
-      required_text_fields+unrequired_text_fields+boolean_fields
+      [:ProductID]+required_text_fields+unrequired_text_fields+boolean_fields
     end
 
     def create_keys
@@ -100,8 +105,7 @@ module Spree
 
     def unrequired_text_fields
       [
-        :ProductID, :Name, :Description,
-        :CategoryID, :Barcode, :TaxRateID, :EatOutTaxRateID, :Sku,
+        :Description,:CategoryID, :Barcode, :TaxRateID, :EatOutTaxRateID, :Sku,
         :BrandID, :SupplierID, :PopupNoteID,
         :UnitOfSale, :VolumeOfSale, :MultiChoiceID, :ColourID,
         :VariantGroupID, :Size, :OrderCode, :ButtonColourID

@@ -25,7 +25,6 @@ module Spree
         end
 
         def create
-          binding.pry
           @product = Spree::Eposnow::Product.new(params[:eposnow_product])
           if @product.create
             return redirect_to admin_eposnow_products_path
@@ -37,7 +36,7 @@ module Spree
         def sync
           @product = Spree::Eposnow::Product.find(params[:id])
           @product.sync
-          return redirect_to admin_eposnow_eposnow_product_path(params[:id])
+          return redirect_to admin_eposnow_product_path(params[:id])
         end
 
         def sync_all

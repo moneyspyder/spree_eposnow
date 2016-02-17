@@ -4,6 +4,10 @@
 <% end %>
 
 <% content_for :page_actions do %>
+  <%= button_link_to  Spree.t(:new_product), 
+                      new_admin_eposnow_product_path, 
+                      { :class => "btn-success", :icon => 'add', :id => 'admin_new_product' } 
+  %>  
   <%= form_for [:admin, Spree::Eposnow::Product.new], 
                 url: sync_all_admin_eposnow_products_path,
                 method: :post do |f| 

@@ -23,7 +23,7 @@ RSpec.describe Spree::Admin::Eposnow::ProductStocksController, type: :controller
   end
 
   describe 'GET index' do  
-
+    render_views
     stub_authorization!
 
     it "has a 200 status code" do

@@ -1,5 +1,5 @@
 <% content_for :page_title do %>
-  <%= link_to Spree.t(:products), admin_eposnow_eposnow_products_path %> /
+  <%= link_to Spree.t(:products), admin_eposnow_products_path %> /
   <%= @product.Name %>
 <% end %>
 
@@ -24,7 +24,7 @@
 
   <div class='col-md-6'>
     <%= form_for [:admin, @product], 
-                  url: sync_admin_eposnow_eposnow_product_path(@product.ProductID), 
+                  url: sync_admin_eposnow_product_path(@product.ProductID), 
                   method: :patch do |f| 
     %>
       <%= button Spree.t('actions.sync'), 'ok', 'submit', {class: 'btn-success'} %>
