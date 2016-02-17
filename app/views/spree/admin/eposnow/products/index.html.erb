@@ -5,7 +5,7 @@
 
 <% content_for :page_actions do %>
   <%= form_for [:admin, Spree::Eposnow::Product.new], 
-                url: sync_all_admin_eposnow_eposnow_products_path,
+                url: sync_all_admin_eposnow_products_path,
                 method: :post do |f| 
   %>
     <%= button Spree.t('actions.sync_all'), 'ok', 'submit', {class: 'btn-success'} %>
@@ -32,8 +32,7 @@
             <% end %>
             <td>
               <%= link_to_edit_url(
-                    #product_admin_eposnow_path(x['ProductID']),
-                    admin_eposnow_eposnow_product_path(x['ProductID']),
+                    admin_eposnow_product_path(x['ProductID']),
                     :no_text => true
                   )
               %>

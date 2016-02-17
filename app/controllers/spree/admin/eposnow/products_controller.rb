@@ -1,7 +1,7 @@
 module Spree
   module Admin
     module Eposnow
-      class EposnowProductsController < Spree::Admin::BaseController
+      class ProductsController < Spree::Admin::BaseController
 
         def index
           params[:page] ||= 1

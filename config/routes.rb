@@ -25,7 +25,7 @@ Spree::Core::Engine.routes.draw do
         end
       end
       # TODO Would rather just use products but that route goes to spree product
-      resources :eposnow_products, only: [:index, :show] do
+      resources :products, only: [:index, :show] do
         member do
           patch :sync
         end

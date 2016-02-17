@@ -2,14 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Spree::Admin::Eposnow::CustomersController, type: :controller do
 
-  # before do
-  #   allow(controller).to receive(:spree_current_user).and_return(nil)
-  # end
   before do
     controller.stub spree_current_user: nil
-  end  
-
-  #let!(:store) { create(:store, default: true) }
+  end
 
   VCR.configure do |config|
     config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
