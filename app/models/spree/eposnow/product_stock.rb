@@ -41,6 +41,10 @@ module Spree
       )
     end
 
+    def set_count_on_hand(count_on_hand)
+      update( { 'CurrentStock' => count_on_hand } )
+    end
+
     def self.index_keys
       keys - [:StockID]
     end
