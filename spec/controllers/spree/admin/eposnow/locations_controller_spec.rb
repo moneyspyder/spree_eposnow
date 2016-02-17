@@ -9,7 +9,7 @@ RSpec.describe Spree::Admin::Eposnow::LocationsController do
   #let!(:store) { create(:store, default: true) }
 
   VCR.configure do |config|
-    config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
+    config.cassette_library_dir = File.join( SpreeEposnow::Engine.root, "spec/fixtures/vcr_cassettes" )
     config.hook_into :webmock # or :fakeweb
   end
 
