@@ -20,6 +20,10 @@ module Spree
           @product = Spree::Eposnow::Product.find(params[:id])
         end
 
+        def new
+          @product = Spree::Eposnow::Product.new
+        end
+
         def sync
           @product = Spree::Eposnow::Product.find(params[:id])
           @product.sync

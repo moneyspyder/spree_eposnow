@@ -9,6 +9,21 @@
       <%# fields_for :eposnow do |f| %>
         <div class="row">
           <div class="col-md-6">
+
+            <div class="panel panel-default documentation">
+              <div class="panel-heading">
+                <h1 class="panel-title">
+                  Support
+                </h1>
+              </div>
+
+              <div class="panel-body">
+                <%= link_to 'Documentation', 
+                            'http://developer.eposnowhq.com/Docs/Documentation' 
+                %>
+              </div>
+            </div>
+
             <!-- <div class="form-group" data-hook="admin_general_setting_api_key"> -->
 
             <%= form_tag admin_eposnow_path, method: :put do |f| %>
@@ -34,9 +49,7 @@
                 <%= button_link_to  Spree.t('actions.cancel'), 
                                     edit_admin_general_settings_url, icon: 'delete' 
                 %>
-              </div>  
-
-              <%= link_to 'Documentation', 'http://developer.eposnowhq.com/Docs/Documentation' %> 
+              </div>
 
             <% end %> 
           
@@ -48,7 +61,7 @@
               <ul data-hook="admin_product_tabs" class="nav nav-pills nav-stacked">
               
                 <li>
-                  <%= link_to 'Products', admin_eposnow_eposnow_products_path %>
+                  <%= link_to 'Products', admin_eposnow_products_path %>
                 </li>
                 <li>
                   <%= link_to 'Categories', admin_eposnow_categories_path %>
@@ -70,7 +83,7 @@
                 </li>                                                            
               </ul> 
 
-            </aside> 
+            </aside>             
 
           </div>        
 

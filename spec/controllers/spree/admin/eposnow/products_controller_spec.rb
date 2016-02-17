@@ -12,7 +12,8 @@ RSpec.describe Spree::Admin::Eposnow::ProductsController, type: :controller do
   #let!(:store) { create(:store, default: true) }
 
   VCR.configure do |config|
-    config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
+    #config.cassette_library_dir = File.join(Flexshop::Engine.root, "test/fixtures/vcr_cassettes")
+    config.cassette_library_dir = File.join( SpreeEposnow::Engine.root, "spec/fixtures/vcr_cassettes" )
     config.hook_into :webmock # or :fakeweb
   end
 
@@ -32,6 +33,18 @@ RSpec.describe Spree::Admin::Eposnow::ProductsController, type: :controller do
       VCR.use_cassette("products") do
         spree_get :index
       end
+      expect(response.status).to eq(200)
+    end
+
+  end
+
+  describe 'GET new' do
+
+    render_views
+    stub_authorization!
+
+    it "has a 200 status code" do
+      spree_get :new
       expect(response.status).to eq(200)
     end
 

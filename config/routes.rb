@@ -24,8 +24,7 @@ Spree::Core::Engine.routes.draw do
           post :link
         end
       end
-      # TODO Would rather just use products but that route goes to spree product
-      resources :products, only: [:index, :show] do
+      resources :products, only: [:index, :show, :new, :create] do
         member do
           patch :sync
         end

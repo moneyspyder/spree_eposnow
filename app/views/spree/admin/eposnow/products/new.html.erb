@@ -1,0 +1,30 @@
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:products), admin_eposnow_products_path %> /
+  <%= 'New EPosNow Product' %>
+<% end %>
+
+<div class='row'>
+
+  <div class='col-md-6'>
+    <%= form_for [:admin, @product], 
+                  url: admin_eposnow_products_path do |f|
+                  #method: :patch do |f| 
+    %>
+      <% @product.keys.each do |key| %> 
+        <div class="form-group">
+          <%= f.label key.to_sym %>
+          <%= f.text_field  key.to_sym,
+                            class: 'form-control'#, :value => @product[key]
+          %>
+        </div>       
+      <% end %>
+
+      <%= button Spree.t('actions.sync'), 'ok', 'submit', {class: 'btn-success'} %>
+    <% end %>    
+  </div>
+
+
+  <div class="col-md-6">
+  </div>  
+
+</div>
