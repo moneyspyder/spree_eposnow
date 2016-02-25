@@ -33,7 +33,7 @@ module Spree
       self.get(
         '/api/V2/Product',
         { query: { page: page_no } } 
-      )
+      ).collect { |x| self.new(x) } 
       #https://api.eposnowhq.com/api/V2/ProductStock?page={Page_No}
     end
 
@@ -69,7 +69,11 @@ module Spree
         product.name = self.Name
         product.description = self.Description
         product.shipping_category = Spree::ShippingCategory.first
-        product.sku = self.Sku
+        if self.Sku.blank?
+          product.sku = self.Sku
+        else
+          product.sku = self.Barcode
+        end
         product.cost_price = self.CostPrice
         product.save
 
@@ -114,6 +118,10 @@ module Spree
 
     def boolean_fields
       [:SellOnWeb, :SellOnTill]
+    end
+
+    def index_fields
+      [:Name, :CostPrice, :SalePrice]+[:ProductID, :Barcode, :Sku]+[:SellOnWeb]
     end
 
   end

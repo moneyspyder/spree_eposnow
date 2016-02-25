@@ -22,7 +22,7 @@
     <table class='table'>
       <thead>
         <tr>
-          <% @products.first.keys.each do |x| %>
+          <% @products.first.index_fields.each do |x| %>
             <th><%= x %></th>
           <% end %>
           <th><%= ' ' %></th>
@@ -31,20 +31,65 @@
       <tbody>
         <% @products.each do |x| %>
           <tr>
-            <% x.values.each do |y| %>
-              <td><%= y %></td>
+            <% @products.first.index_fields.each do |key| %>
+              <td>
+                <%= x.send(key) %>
+              </td>
             <% end %>
             <td>
               <%= link_to_edit_url(
-                    admin_eposnow_product_path(x['ProductID']),
+                    admin_eposnow_product_path(x.ProductID),
                     :no_text => true
                   )
               %>
+              <%# edit_admin_product %>
+              <%# admin_eposnow_product_path %>
             </td>            
           </tr>
+          <tr class='small'>
+            <% variant = Spree::Variant.where(eposnow_product_id: x.ProductID).first %>
+            <% if variant %>
+              <td>
+                <%= link_to(
+                      variant.product.name, 
+                      admin_product_variants_path(variant.product) 
+                    ) 
+                %>
+              </td>
+              <td><%= variant.cost_price %></td>
+              <td><%= variant.price %></td>
+              <td><%= variant.eposnow_product_id %></td>
+              <td><%= variant.sku %></td>
+              <td><%= variant.sku %></td>
+              <td><%= variant.product.available? %></td>
+              <td>
+                <%= link_to_edit_url(
+                      edit_admin_product_path(variant.product),
+                      :no_text => true
+                    )
+                %>
+              </td>
+            <% else %>
+              <td colspan='7'><b>Missing</b></td>
+            <% end %>
+          </tr>          
         <% end %>
       </tbody>
     </table>
   </div>
 
+</div>
+
+<div class="row index-pagination-row">
+  <div class="col-sm-6">
+
+  </div>
+  <div class="col-sm-6">
+    <div class="pagination-wrap">
+      <%= 
+        button_link_to 'Next', admin_eposnow_products_path(page: params[:page].to_i+1),
+                        {class: 'btn-default pull-right'}
+      %>
+    </div>
+  </div>
 </div>
