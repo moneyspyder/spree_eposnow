@@ -21,6 +21,10 @@ module Spree
         end
 
         def sync_all
+
+          # TODO This is duplicated with the sync RakeTask
+          link_with_eposnow
+
           @product_stocks = Spree::Eposnow::ProductStock.paginate(1)
           
           @product_stocks.each do |product_stock|
@@ -34,15 +38,37 @@ module Spree
 
             stock_item.eposnow_product_stock_id = product_stock['StockID']
             stock_item.set_count_on_hand product_stock['CurrentStock'] >= 0 ? product_stock['CurrentStock'] : 0
-
-            #stock_movement = stock_location.stock_movements.build(stock_movement_params)
-            #stock_movement.stock_item = stock_location.set_up_stock_item(variant)            
-            #puts stock_location.inspect
           end
           return redirect_to admin_eposnow_product_stocks_path
         end
 
+      protected
+
+        def link_with_eposnow
+          results = []
+          page = 1
+          until (@products = Spree::Eposnow::Product.paginate(page)).empty?
+            @products.each do |x|
+              sku = x.Barcode
+              next if sku.nil?
+              next if sku.blank?
+              v = Spree::Variant.find_by_sku(sku)
+              next if v.nil?
+              if v.eposnow_product_id.nil?
+                product_id = x.ProductID.to_i
+                v.eposnow_product_id = product_id
+                v.save
+                results << v.product.name
+              end
+            end  
+            page +=1
+          end
+        end        
+
       end
+
     end
+    
   end
+
 end
