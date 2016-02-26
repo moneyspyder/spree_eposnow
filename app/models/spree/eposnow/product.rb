@@ -54,17 +54,20 @@ module Spree
     end
 
     def sync
-      variant = Spree::Variant.find_by_sku(self.Sku)
+      variant = Spree::Variant.find_by_sku(self.Barcode)
       
-      if Spree::Variant.find_by_sku(self.Sku)
+      if variant
         category = Spree::Taxon.find_by_eposnow_category_id(self.CategoryID)
         product = variant.product
         unless product.taxons.include?(category)
           product.taxons << category
           product.save
         end
+        variant.cost_price = self.CostPrice
+        variant.price = Money.new(self.SalePrice)
+        variant.eposnow_product_id = self.ProductID
+        variant.save
       else
-
         product = Spree::Product.new
         product.name = self.Name
         product.description = self.Description
