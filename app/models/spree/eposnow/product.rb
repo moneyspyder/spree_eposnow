@@ -59,9 +59,12 @@ module Spree
       if variant
         category = Spree::Taxon.find_by_eposnow_category_id(self.CategoryID)
         product = variant.product
-        unless product.taxons.include?(category)
-          product.taxons << category
-          product.save
+        
+        unless category.nil?
+          unless product.taxons.include?(category)
+            product.taxons << category
+            product.save
+          end          
         end
         variant.cost_price = self.CostPrice
         variant.price = Money.new(self.SalePrice)
