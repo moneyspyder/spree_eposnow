@@ -37,6 +37,11 @@ require 'spree/testing_support/authorization_helpers'
 
 FactoryGirl.find_definitions
 
+VCR.configure do |config|
+  config.cassette_library_dir = File.join( SpreeEposnow::Engine.root, "spec","fixtures", "vcr_cassettes" )
+  config.hook_into :webmock # or :fakeweb
+end
+
 RSpec.configure do |config|
 
   config.infer_spec_type_from_file_location!

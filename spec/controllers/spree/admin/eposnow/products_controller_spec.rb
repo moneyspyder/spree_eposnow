@@ -4,11 +4,6 @@ RSpec.describe Spree::Admin::Eposnow::ProductsController, type: :controller do
 
   before do
     controller.stub spree_current_user: nil
-  end  
-
-  VCR.configure do |config|
-    config.cassette_library_dir = File.join( SpreeEposnow::Engine.root, "spec/fixtures/vcr_cassettes" )
-    config.hook_into :webmock # or :fakeweb
   end
 
   # TODO Need to set the preferences before the model is loaded
