@@ -19,7 +19,8 @@ module Spree
     attr_accessor   :Title, :Forename, :Surname, :BusinessName, :DateOfBirth, :MainAddressID,
                     :ContactNumber, :ContactNumber2, :EmailAddress, :Type,
                     :MaxCredit, :CurrentBalance, :CurrentBalance, :ExpiryDate,
-                    :CardNumber, :CurrentPoints, :SignUpDate, :Notes
+                    :CardNumber, :CurrentPoints, :SignUpDate, :Notes, :CustomerID,
+                    :SignUpLocationID
 
     def self.create(attrs = {})
       self.post(
@@ -47,6 +48,13 @@ module Spree
         }
       )
     end
+
+    def self.paginate(page_no = 1)
+      self.get(
+        '/api/V2/Customer',
+        { query: { page: page_no } } 
+      ).collect { |x| self.new(x) } 
+    end    
 
   end
 

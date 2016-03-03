@@ -8,9 +8,10 @@ module Spree
         end
 
         def index
-          @customers =  Spree::EposNow.customers.collect do |x| 
-                          x.slice("Forename", "Surname", "EmailAddress", "ContactNumber")
-                        end          
+          @customers =  Spree::Eposnow::Customer.paginate
+          # @customers =  Spree::Eposnow::Customer.paginate.collect do |x| 
+          #                 x.slice("Forename", "Surname", "EmailAddress", "ContactNumber")
+          #               end          
         end
 
         def create
