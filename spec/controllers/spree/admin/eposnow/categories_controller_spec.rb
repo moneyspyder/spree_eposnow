@@ -15,6 +15,7 @@ RSpec.describe Spree::Admin::Eposnow::CategoriesController, type: :controller do
   before(:each) do
     Spree::Config[:eposnow_key] = '2ND36E1H9HWAMCAR2P8QCJFGPUQVOLF0'
     Spree::Config[:eposnow_secret] = '868MZR5KHSNQYGVYSYK8N8QN1EV402DG'
+    Spree::Eposnow::Category.basic_auth(Spree::Config[:eposnow_key],Spree::Config[:eposnow_secret])
   end
 
   describe 'GET index' do  
