@@ -18,6 +18,7 @@ module Spree
 
         def show
           @product = Spree::Eposnow::Product.find(params[:id])
+          @variant = Spree::Variant.where(eposnow_product_id: @product.ProductID).first
         end
 
         def new

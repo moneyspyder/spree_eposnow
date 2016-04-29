@@ -23,6 +23,22 @@
   </div>
 
   <div class='col-md-6'>
+
+    <% if @variant %>
+    <% else %>
+      <div class="panel panel-default documentation">
+        <div class="panel-heading">
+          <h1 class="panel-title">
+            Warning
+          </h1>
+        </div>
+
+        <div class="panel-body">
+          You are missing a variant with an ePOSnow ID "<%= @product.ProductID %>".
+        </div>
+      </div>
+    <% end %>
+
     <%= form_for [:admin, @product], 
                   url: sync_admin_eposnow_product_path(@product.ProductID), 
                   method: :patch do |f| 
