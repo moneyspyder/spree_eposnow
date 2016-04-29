@@ -17,7 +17,7 @@ module Spree
     end
 
     attr_accessor   :StockID, :LocationID, :ProductID, :CurrentStock, :MinStock,
-                    :MaxStock, :CurrentVolume, :OnOrder, :Alerts
+                    :MaxStock, :CurrentVolume, :OnOrder, :Alerts, :CostPrice
 
     def self.paginate(page_no = 1)
       self.get(
@@ -52,14 +52,14 @@ module Spree
     def self.keys
       [
         :StockID, :LocationID, :Product, :CurrentStock, :MinStock,
-        :MaxStock, :CurrentVolume, :OnOrder, :Alerts
+        :MaxStock, :CurrentVolume, :OnOrder, :Alerts, :CostPrice
       ]      
     end
 
     def keys
       [
         :StockID, :LocationID, :ProductID, :CurrentStock, :MinStock,
-        :MaxStock, :CurrentVolume, :OnOrder, :Alerts
+        :MaxStock, :CurrentVolume, :OnOrder, :Alerts, :CostPrice
       ]
     end
 

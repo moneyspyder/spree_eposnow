@@ -30,6 +30,30 @@ RSpec.describe Spree::Admin::Eposnow::ProductStocksController, type: :controller
 
   end
 
+  describe 'GET edit' do
+
+    render_views
+    stub_authorization!
+
+    context 'variant exists' do
+
+      let(:variant) do
+        FactoryGirl.create(:base_variant, eposnow_product_id: '1163872')
+      end
+
+      before(:each) { variant }
+
+      it "has a 200 status code" do
+        VCR.use_cassette("product_stocks_edit") do
+          spree_get :edit, id: '431656'
+        end
+        expect(response.status).to eq(200)
+      end   
+
+    end 
+
+  end
+
   describe 'POST sync_all' do
     render_views
     stub_authorization!
