@@ -25,6 +25,17 @@
   <div class='col-md-6'>
 
     <% if @variant %>
+      <div class="panel panel-default documentation">
+        <div class="panel-heading">
+          <h1 class="panel-title">
+            <%= @variant.name %>
+          </h1>
+        </div>
+
+        <div class="panel-body">
+          View <%= link_to @variant.name, stock_admin_product_path(@variant.product) %>
+        </div>
+      </div>    
     <% else %>
       <div class="panel panel-default documentation">
         <div class="panel-heading">
